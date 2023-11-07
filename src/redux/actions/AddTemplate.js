@@ -7,6 +7,7 @@ const initialState = {
       title: "文字模板",
       template: [
         {
+          id: v4(),
           options: [],
           required: true,
           title: "Email",
@@ -19,6 +20,7 @@ const initialState = {
       title: "Radio模板",
       template: [
         {
+          id: v4(),
           options: [
             {
               label: "選項1",
@@ -40,6 +42,7 @@ const initialState = {
       title: "CheckBox模板",
       template: [
         {
+          id: v4(),
           options: [
             {
               label: "選項1",
@@ -61,6 +64,7 @@ const initialState = {
       title: "食物模板",
       template: [
         {
+          id: v4(),
           options: [
             {
               label: "葷",
@@ -82,6 +86,7 @@ const initialState = {
       title: "房型模板",
       template: [
         {
+          id: v4(),
           options: [
             {
               label: "雙人房",

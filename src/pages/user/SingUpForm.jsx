@@ -58,68 +58,62 @@ export default function SingUpForm() {
                 />
               </Form.Item>
             </Col>
-            {isData?.template?.map((item, index) => {
+            {isData?.template?.map((template, index) => {
               return (
-                <React.Fragment key={index}>
-                  {item?.map((template, i) => {
-                    return (
-                      <Col span={8} key={i}>
-                        {template.type === "Input" ? (
-                          <Form.Item
-                            label={template.title}
-                            name={template.type + index + 1}
-                          >
-                            <Input />
-                          </Form.Item>
-                        ) : null}
-                        {template.type === "Radio" ? (
-                          <Form.Item
-                            label={template.title}
-                            name={template.type + index + 1}
-                          >
-                            <Radio.Group>
-                              {template.options.map((radio) => {
-                                return (
-                                  <Radio value={radio.value} key={radio.value}>
-                                    {radio.label}
-                                  </Radio>
-                                );
-                              })}
-                            </Radio.Group>
-                          </Form.Item>
-                        ) : null}
-                        {template.type === "Checkbox" ? (
-                          <Form.Item
-                            label={template.title}
-                            name={template.type + index + 1}
-                          >
-                            <Checkbox.Group className="flex">
-                              {template.options.map((ch) => {
-                                return (
-                                  <Checkbox
-                                    className="templateCheckbox"
-                                    key={ch.value}
-                                    value={ch.value}
-                                  >
-                                    {ch.label}
-                                  </Checkbox>
-                                );
-                              })}
-                            </Checkbox.Group>
-                          </Form.Item>
-                        ) : null}
-                        {template.type === "Select" ? (
-                          <Form.Item
-                            label={template.title}
-                            name={template.type + index + 1}
-                          >
-                            <Select options={template.options} />
-                          </Form.Item>
-                        ) : null}
-                      </Col>
-                    );
-                  })}
-                </React.Fragment>
+                <Col span={8} key={index}>
+                  {template.type === "Input" ? (
+                    <Form.Item
+                      label={template.title}
+                      name={template.type + index + 1}
+                    >
+                      <Input />
+                    </Form.Item>
+                  ) : null}
+                  {template.type === "Radio" ? (
+                    <Form.Item
+                      label={template.title}
+                      name={template.type + index + 1}
+                    >
+                      <Radio.Group>
+                        {template.options.map((radio) => {
+                          return (
+                            <Radio value={radio.value} key={radio.value}>
+                              {radio.label}
+                            </Radio>
+                          );
+                        })}
+                      </Radio.Group>
+                    </Form.Item>
+                  ) : null}
+                  {template.type === "Checkbox" ? (
+                    <Form.Item
+                      label={template.title}
+                      name={template.type + index + 1}
+                    >
+                      <Checkbox.Group className="flex">
+                        {template.options.map((ch) => {
+                          return (
+                            <Checkbox
+                              className="templateCheckbox"
+                              key={ch.value}
+                              value={ch.value}
+                            >
+                              {ch.label}
+                            </Checkbox>
+                          );
+                        })}
+                      </Checkbox.Group>
+                    </Form.Item>
+                  ) : null}
+                  {template.type === "Select" ? (
+                    <Form.Item
+                      label={template.title}
+                      name={template.type + index + 1}
+                    >
+                      <Select options={template.options} />
+                    </Form.Item>
+                  ) : null}
+                </Col>
               );
             })}
             <Col span={24} className="flex justifyEnd">

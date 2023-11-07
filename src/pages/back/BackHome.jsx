@@ -6,10 +6,14 @@ import BackMenu from "./Menu/BackMenu";
 import { v4 } from "uuid";
 export default function Index() {
   const dispatch = useDispatch();
+
   const [form] = Form.useForm();
-  const [isShowTemplate, setIsShowTemplate] = useState([]);
   const watchPayType = Form.useWatch("payType", form);
+
+  const [isShowTemplate, setIsShowTemplate] = useState([]);
   const [isPaySelect, setIsPaySelect] = useState(false);
+
+  const [isSaveDrag, setIsSaveDrag] = useState({ start: {}, end: {} });
 
   const releaseTemplate = (values) => {
     const sendTemplate = {
@@ -20,8 +24,37 @@ export default function Index() {
     };
     dispatch(setNewTemplate(sendTemplate));
     alert("新增成功");
-    // form.resetFields();
   };
+
+  const handleDragList = {
+    tableDragStart: (_, id, index) => {
+      setIsSaveDrag((data) => ({ ...data, start: { ...id, key: index } }));
+    },
+    tableDragOver: (e) => {
+      e.preventDefault();
+    },
+    tableDrag: (e, id, index) => {
+      e.preventDefault();
+      setIsSaveDrag((data) => ({ ...data, end: { ...id, key: index } }));
+    },
+  };
+
+  useEffect(() => {
+    const startID = isSaveDrag.start.id;
+    const endID = isSaveDrag.end.id;
+
+    if (startID === endID || !startID || !endID) {
+      return;
+    }
+    // console.log(isSaveDrag);
+    const cacheData = isShowTemplate;
+    [cacheData[isSaveDrag?.start?.key], cacheData[isSaveDrag?.end?.key]] = [
+      cacheData[isSaveDrag?.end?.key],
+      cacheData[isSaveDrag?.start?.key],
+    ];
+    setIsShowTemplate(cacheData);
+    setIsSaveDrag({ start: {}, end: {} });
+  }, [isSaveDrag, isShowTemplate]);
 
   useEffect(() => {
     if (watchPayType === "1") {
@@ -146,68 +179,74 @@ export default function Index() {
               ></div>
               <span className="fz-24 fw-900">預覽</span>
             </Col>
-            {isShowTemplate?.map((item, index) => {
+            {isShowTemplate?.map((template, index) => {
               return (
-                <React.Fragment key={index}>
-                  {item?.map((template, i) => {
-                    return (
-                      <Col span={8} key={i}>
-                        {template.type === "Input" ? (
-                          <Form.Item
-                            label={template.title}
-                            name={template.type + index + 1}
-                          >
-                            <Input />
-                          </Form.Item>
-                        ) : null}
-                        {template.type === "Radio" ? (
-                          <Form.Item
-                            label={template.title}
-                            name={template.type + index + 1}
-                          >
-                            <Radio.Group>
-                              {template.options.map((radio) => {
-                                return (
-                                  <Radio value={radio.value} key={radio.value}>
-                                    {radio.label}
-                                  </Radio>
-                                );
-                              })}
-                            </Radio.Group>
-                          </Form.Item>
-                        ) : null}
-                        {template.type === "Checkbox" ? (
-                          <Form.Item
-                            label={template.title}
-                            name={template.type + index + 1}
-                          >
-                            <Checkbox.Group className="flex">
-                              {template.options.map((ch) => {
-                                return (
-                                  <Checkbox
-                                    className="templateCheckbox"
-                                    key={ch.value}
-                                    value={ch.value}
-                                  >
-                                    {ch.label}
-                                  </Checkbox>
-                                );
-                              })}
-                            </Checkbox.Group>
-                          </Form.Item>
-                        ) : null}
-                        {template.type === "Select" ? (
-                          <Form.Item
-                            label={template.title}
-                            name={template.type + index + 1}
-                          >
-                            <Select options={template.options} />
-                          </Form.Item>
-                        ) : null}
-                      </Col>
-                    );
-                  })}
-                </React.Fragment>
+                <Col
+                  span={8}
+                  key={index}
+                  className="btn-pointer"
+                  draggable={isShowTemplate?.length !== 1}
+                  onDrop={(e) => handleDragList.tableDrag(e, template, index)}
+                  onDragStart={(e) =>
+                    handleDragList.tableDragStart(e, template, index)
+                  }
+                  onDragOver={(e) =>
+                    handleDragList.tableDragOver(e, template, index)
+                  }
+                >
+                  {template.type === "Input" ? (
+                    <Form.Item
+                      label={template.title}
+                      name={template.type + index + 1}
+                    >
+                      <Input />
+                    </Form.Item>
+                  ) : null}
+                  {template.type === "Radio" ? (
+                    <Form.Item
+                      label={template.title}
+                      name={template.type + index + 1}
+                    >
+                      <Radio.Group>
+                        {template.options.map((radio) => {
+                          return (
+                            <Radio value={radio.value} key={radio.value}>
+                              {radio.label}
+                            </Radio>
+                          );
+                        })}
+                      </Radio.Group>
+                    </Form.Item>
+                  ) : null}
+                  {template.type === "Checkbox" ? (
+                    <Form.Item
+                      label={template.title}
+                      name={template.type + index + 1}
+                    >
+                      <Checkbox.Group className="flex">
+                        {template.options.map((ch) => {
+                          return (
+                            <Checkbox
+                              className="templateCheckbox"
+                              key={ch.value}
+                              value={ch.value}
+                            >
+                              {ch.label}
+                            </Checkbox>
+                          );
+                        })}
+                      </Checkbox.Group>
+                    </Form.Item>
+                  ) : null}
+                  {template.type === "Select" ? (
+                    <Form.Item
+                      label={template.title}
+                      name={template.type + index + 1}
+                    >
+                      <Select options={template.options} />
+                    </Form.Item>
+                  ) : null}
+                </Col>
               );
             })}
 

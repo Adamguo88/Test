@@ -12,8 +12,8 @@ export default function BackMenu({ setIsShowTemplate }) {
   const [isTemplate, setIsTemplate] = useState([]); //儲存check狀態
 
   const getCheckTemplate = (values) => {
-    console.log(values);
-    setIsShowTemplate(values);
+    // console.log(values);
+    setIsShowTemplate(values.flat(Infinity));
   };
 
   useEffect(() => {
