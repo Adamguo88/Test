@@ -1,0 +1,85 @@
+.loading-position {
+  position: fixed;
+  z-index: 8888;
+}
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.api-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100vh;
+  background-color: transparent;
+}
+.loading-text {
+  position: absolute;
+  /* top: 60%; */
+}
+.left,
+.right {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -10px;
+}
+
+.left span,
+.right span {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+
+.left span {
+  transform: rotate(calc(var(--r) * 30deg));
+  justify-content: end;
+}
+
+.right span {
+  justify-content: start;
+  transform: rotate(calc(var(--r) * -30deg));
+}
+
+.left span::after,
+.right span::after {
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  content: "";
+  background: black;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ani 2.4s linear infinite calc(var(--r) * 0.1s);
+}
+
+@keyframes ani {
+  0%,
+  50%,
+  100% {
+    transform: scale(0);
+  }
+  25% {
+    transform: scale(1.5);
+    box-shadow: 0 0 4px black, 0 0 8px black, 0 0 16px black;
+  }
+}

@@ -1,0 +1,171 @@
+.client-img {
+  width: 100%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-image: url("../assets/img/notPhoto.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  object-fit: contain;
+}
+
+.company_logo {
+  height: 106px;
+  width: 278px;
+  background-image: url("../assets/img/login/logo_company.svg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: contain;
+}
+.changePassword_logo {
+  height: 160px;
+  width: 160px;
+  background-image: url("../assets/img/login/logivVerify/changePassword.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: contain;
+}
+.verify_logo {
+  height: 160px;
+  width: 160px;
+  background-image: url("../assets/img/login/logivVerify/verify.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: contain;
+}
+.header-logo {
+  display: block;
+  width: 198px;
+  height: 36px;
+  // background-image: url("../assets/img/header/header.svg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: contain;
+}
+.footer-logo {
+  width: 48px;
+  height: 42px;
+  background-image: url("../assets/img/footer/footer.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: contain;
+}
+
+.home-button-background {
+  width: 100%;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: contain;
+  padding: 24px 32px;
+  border-radius: 15px;
+}
+.second-header {
+  height: 80px;
+  background-image: linear-gradient(
+      rgba(183, 164, 141, 0.8),
+      rgba(183, 164, 141, 0.8)
+    ),
+    url("../assets/img/button-background.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: contain;
+  font-weight: 900;
+}
+
+.notPhoto {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  border: none;
+  object-fit: cover;
+}
+
+.home-1 {
+  background-image: linear-gradient(
+      rgba(157, 89, 9, 0.75),
+      rgba(157, 89, 9, 0.75)
+    ),
+    url("../assets/img/button-background.jpg");
+}
+.home-2 {
+  background-image: linear-gradient(
+      rgba(65, 68, 144, 0.75),
+      rgba(65, 68, 144, 0.75)
+    ),
+    url("../assets/img/button-background.jpg");
+}
+.home-3 {
+  background-image: linear-gradient(
+      rgba(115, 46, 84, 0.75),
+      rgba(115, 46, 84, 0.75)
+    ),
+    url("../assets/img/button-background.jpg");
+}
+.home-4 {
+  background-image: linear-gradient(
+      rgba(228, 68, 84, 0.75),
+      rgba(228, 68, 84, 0.75)
+    ),
+    url("../assets/img/button-background.jpg");
+}
+.home-5 {
+  background-image: linear-gradient(
+      rgba(56, 155, 243, 0.75),
+      rgba(56, 155, 243, 0.75)
+    ),
+    url("../assets/img/button-background.jpg");
+}
+.home-6 {
+  background-image: linear-gradient(
+      rgba(239, 133, 0, 0.75),
+      rgba(239, 133, 0, 0.75)
+    ),
+    url("../assets/img/button-background.jpg");
+}
+.home-7 {
+  background-image: linear-gradient(
+      rgba(134, 83, 231, 0.75),
+      rgba(134, 83, 231, 0.75)
+    ),
+    url("../assets/img/button-background.jpg");
+}
+.home-8 {
+  background-image: linear-gradient(
+      rgba(151, 118, 106, 0.75),
+      rgba(151, 118, 106, 0.75)
+    ),
+    url("../assets/img/button-background.jpg");
+}
+
+@media only screen and (max-width: 992px) {
+  .header-logo {
+    display: block;
+    width: 198px;
+    height: 36px;
+    background-image: url("../assets/img/header/mobile-header.svg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: contain;
+  }
+}
+
+@media only screen and (max-height: 560px) {
+  .company_logo {
+    height: 53px;
+    width: 139px;
+    background-image: url("../assets/img/login/logo_company.svg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: contain;
+  }
+}
