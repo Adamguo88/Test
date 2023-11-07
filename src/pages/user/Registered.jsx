@@ -11,8 +11,8 @@ const items = [
     label: "全支付",
   },
   {
-    key: "1",
-    label: "ETC",
+    key: "3",
+    label: "綠界",
   },
 ];
 export default function Registered() {

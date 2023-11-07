@@ -60,7 +60,7 @@ export default function Index() {
             </Col>
             <Col span={24}>
               <Form.Item
-                label="問卷名稱"
+                label="活動名稱"
                 name="templateName"
                 rules={[
                   {
@@ -117,7 +117,8 @@ export default function Index() {
             {isPaySelect ? (
               <Col span={24}>
                 <Form.Item label="繳費類型" name="payList">
-                  <Checkbox.Group className="templateCheckbox"
+                  <Checkbox.Group
+                    className="templateCheckbox"
                     style={{ color: "black" }}
                     options={[
                       {

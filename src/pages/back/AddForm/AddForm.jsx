@@ -270,7 +270,7 @@ export default function AddForm() {
           <Row gutter={[12, 12]} className="width100">
             <Col span={24}>
               <Button type="primary" onClick={() => addModal.showModal()}>
-                新增模板
+                新增問項
               </Button>
             </Col>
             <Col span={24} className="flex flex-column">
@@ -374,389 +374,193 @@ export function AddComponent({
   };
 
   useEffect(() => {
-    if (!!isEditModalData) {
-      if (getAddType === "Input") {
-        const InputComponent = () => {
-          return (
-            <>
-              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-                <Form.Item
-                  label={AddChildren[getAddType].isRequire}
-                  name="IsRequired"
-                  valuePropName="checked"
-                >
-                  <Switch />
-                </Form.Item>
-              </Col>
-            </>
-          );
-        };
-        setIsAddChildren(InputComponent);
-      }
-      if (getAddType === "Radio") {
-        const RadioComponent = () => {
-          return (
-            <>
-              <Col span={24}>
-                <Form.List name="items">
-                  {(fields = isEditModalData.options, { add, remove }) => (
-                    <div className="width100">
-                      {fields.map((field) => {
-                        console.log(
-                          isEditModalData.options?.[field.key]?.value
-                        );
-                        return (
-                          <Space.Compact block key={field.key}>
-                            <Form.Item
-                              label={`新增選項`}
-                              name={[field.name, "name"]}
-                              className="width100"
-                              initialValue={
-                                isEditModalData.options?.[field.key]?.value
-                              }
-                              rules={[
-                                {
-                                  required: true,
-                                  message: "此欄位不得為空",
-                                },
-                              ]}
-                            >
-                              <Input />
-                            </Form.Item>
-                            {field.name === 0 ? null : (
-                              <Button
-                                type="primary"
-                                onClick={() => remove(field.name)}
-                              >
-                                刪除
-                              </Button>
-                            )}
-                          </Space.Compact>
-                        );
-                      })}
-                      <Button type="primary" onClick={() => add()} block>
-                        新增選項
-                      </Button>
-                    </div>
-                  )}
-                </Form.List>
-              </Col>
-              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-                <Form.Item
-                  label={AddChildren[getAddType].isRequire}
-                  name="IsRequired"
-                  valuePropName="checked"
-                >
-                  <Switch />
-                </Form.Item>
-              </Col>
-            </>
-          );
-        };
-        setIsAddChildren(RadioComponent);
-      }
-      if (getAddType === "Checkbox") {
-        const CheckboxComponent = () => {
-          return (
-            <>
-              <Col span={24}>
-                <Form.List name="items">
-                  {(fields = isEditModalData.options, { add, remove }) => (
-                    <div className="width100">
-                      {fields.map((field) => {
-                        return (
-                          <Space.Compact block key={field.key}>
-                            <Form.Item
-                              label={`新增選項`}
-                              name={[field.name, "name"]}
-                              className="width100"
-                              rules={[
-                                {
-                                  required: true,
-                                  message: "此欄位不得為空",
-                                },
-                              ]}
-                            >
-                              <Input />
-                            </Form.Item>
-                            {field.name === 0 ? null : (
-                              <Button
-                                type="primary"
-                                onClick={() => remove(field.name)}
-                              >
-                                刪除
-                              </Button>
-                            )}
-                          </Space.Compact>
-                        );
-                      })}
-                      <Button type="primary" onClick={() => add()} block>
-                        新增選項
-                      </Button>
-                    </div>
-                  )}
-                </Form.List>
-              </Col>
-              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-                <Form.Item
-                  label={AddChildren[getAddType].isRequire}
-                  name="IsRequired"
-                  valuePropName="checked"
-                >
-                  <Switch />
-                </Form.Item>
-              </Col>
-            </>
-          );
-        };
-        setIsAddChildren(CheckboxComponent);
-      }
-      if (getAddType === "Select") {
-        const SelectComponent = () => {
-          return (
-            <>
-              <Col span={24}>
-                <Form.List name="items">
-                  {(fields = isEditModalData.options, { add, remove }) => (
-                    <div className="width100">
-                      {fields.map((field) => {
-                        console.log(fields, field, isEditModalData);
-                        return (
-                          <Space.Compact block key={field.key}>
-                            <Form.Item
-                              label={`新增選項`}
-                              name={[field.name, "name"]}
-                              className="width100"
-                              rules={[
-                                {
-                                  required: true,
-                                  message: "此欄位不得為空",
-                                },
-                              ]}
-                            >
-                              <Input />
-                            </Form.Item>
-                            {field.name === 0 ? null : (
-                              <Button
-                                type="primary"
-                                onClick={() => remove(field.name)}
-                              >
-                                刪除
-                              </Button>
-                            )}
-                          </Space.Compact>
-                        );
-                      })}
-                      <Button type="primary" onClick={() => add()} block>
-                        新增選項
-                      </Button>
-                    </div>
-                  )}
-                </Form.List>
-              </Col>
-              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-                <Form.Item
-                  label={AddChildren[getAddType].isRequire}
-                  name="IsRequired"
-                  valuePropName="checked"
-                >
-                  <Switch />
-                </Form.Item>
-              </Col>
-            </>
-          );
-        };
-        setIsAddChildren(SelectComponent);
-      }
-    } else {
-      if (getAddType === "Input") {
-        const InputComponent = () => {
-          return (
-            <>
-              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-                <Form.Item
-                  label={AddChildren[getAddType].isRequire}
-                  name="IsRequired"
-                  valuePropName="checked"
-                >
-                  <Switch />
-                </Form.Item>
-              </Col>
-            </>
-          );
-        };
-        setIsAddChildren(InputComponent);
-      }
-      if (getAddType === "Radio") {
-        const RadioComponent = () => {
-          return (
-            <>
-              <Col span={24}>
-                <Form.List name="items">
-                  {(fields, { add, remove }) => (
-                    <div className="width100">
-                      {fields.map((field) => {
-                        return (
-                          <Space.Compact block key={field.key}>
-                            <Form.Item
-                              label={`新增選項`}
-                              name={[field.name, "name"]}
-                              className="width100"
-                              rules={[
-                                {
-                                  required: true,
-                                  message: "此欄位不得為空",
-                                },
-                              ]}
-                            >
-                              <Input />
-                            </Form.Item>
-                            {field.name === 0 ? null : (
-                              <Button
-                                type="primary"
-                                onClick={() => remove(field.name)}
-                              >
-                                刪除
-                              </Button>
-                            )}
-                          </Space.Compact>
-                        );
-                      })}
-                      <Button type="primary" onClick={() => add()} block>
-                        新增選項
-                      </Button>
-                    </div>
-                  )}
-                </Form.List>
-              </Col>
-              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-                <Form.Item
-                  label={AddChildren[getAddType].isRequire}
-                  name="IsRequired"
-                  valuePropName="checked"
-                >
-                  <Switch />
-                </Form.Item>
-              </Col>
-            </>
-          );
-        };
-        setIsAddChildren(RadioComponent);
-      }
-      if (getAddType === "Checkbox") {
-        const CheckboxComponent = () => {
-          return (
-            <>
-              <Col span={24}>
-                <Form.List name="items">
-                  {(fields, { add, remove }) => (
-                    <div className="width100">
-                      {fields.map((field) => {
-                        return (
-                          <Space.Compact block key={field.key}>
-                            <Form.Item
-                              label={`新增選項`}
-                              name={[field.name, "name"]}
-                              className="width100"
-                              rules={[
-                                {
-                                  required: true,
-                                  message: "此欄位不得為空",
-                                },
-                              ]}
-                            >
-                              <Input />
-                            </Form.Item>
-                            {field.name === 0 ? null : (
-                              <Button
-                                type="primary"
-                                onClick={() => remove(field.name)}
-                              >
-                                刪除
-                              </Button>
-                            )}
-                          </Space.Compact>
-                        );
-                      })}
-                      <Button type="primary" onClick={() => add()} block>
-                        新增選項
-                      </Button>
-                    </div>
-                  )}
-                </Form.List>
-              </Col>
-              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-                <Form.Item
-                  label={AddChildren[getAddType].isRequire}
-                  name="IsRequired"
-                  valuePropName="checked"
-                >
-                  <Switch />
-                </Form.Item>
-              </Col>
-            </>
-          );
-        };
-        setIsAddChildren(CheckboxComponent);
-      }
-      if (getAddType === "Select") {
-        const SelectComponent = () => {
-          return (
-            <>
-              <Col span={24}>
-                <Form.List name="items">
-                  {(fields, { add, remove }) => (
-                    <div className="width100">
-                      {fields.map((field) => {
-                        return (
-                          <Space.Compact block key={field.key}>
-                            <Form.Item
-                              label={`新增選項`}
-                              name={[field.name, "name"]}
-                              className="width100"
-                              rules={[
-                                {
-                                  required: true,
-                                  message: "此欄位不得為空",
-                                },
-                              ]}
-                            >
-                              <Input />
-                            </Form.Item>
-                            {field.name === 0 ? null : (
-                              <Button
-                                type="primary"
-                                onClick={() => remove(field.name)}
-                              >
-                                刪除
-                              </Button>
-                            )}
-                          </Space.Compact>
-                        );
-                      })}
-                      <Button type="primary" onClick={() => add()} block>
-                        新增選項
-                      </Button>
-                    </div>
-                  )}
-                </Form.List>
-              </Col>
-              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-                <Form.Item
-                  label={AddChildren[getAddType].isRequire}
-                  name="IsRequired"
-                  valuePropName="checked"
-                >
-                  <Switch />
-                </Form.Item>
-              </Col>
-            </>
-          );
-        };
-        setIsAddChildren(SelectComponent);
-      }
+    if (getAddType === "Input") {
+      const InputComponent = () => {
+        return (
+          <>
+            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+              <Form.Item
+                label={AddChildren[getAddType].isRequire}
+                name="IsRequired"
+                valuePropName="checked"
+              >
+                <Switch />
+              </Form.Item>
+            </Col>
+          </>
+        );
+      };
+      setIsAddChildren(InputComponent);
     }
-  }, [getAddType, isEditModalData]);
+    if (getAddType === "Radio") {
+      const RadioComponent = () => {
+        return (
+          <>
+            <Col span={24}>
+              <Form.List name="items">
+                {(fields, { add, remove }) => (
+                  <div className="width100">
+                    {fields.map((field) => {
+                      return (
+                        <Space.Compact block key={field.key}>
+                          <Form.Item
+                            label={`新增選項`}
+                            name={[field.name, "name"]}
+                            className="width100"
+                            rules={[
+                              {
+                                required: true,
+                                message: "此欄位不得為空",
+                              },
+                            ]}
+                          >
+                            <Input />
+                          </Form.Item>
+                          {field.name === 0 ? null : (
+                            <Button
+                              type="primary"
+                              onClick={() => remove(field.name)}
+                            >
+                              刪除
+                            </Button>
+                          )}
+                        </Space.Compact>
+                      );
+                    })}
+                    <Button type="primary" onClick={() => add()} block>
+                      新增選項
+                    </Button>
+                  </div>
+                )}
+              </Form.List>
+            </Col>
+            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+              <Form.Item
+                label={AddChildren[getAddType].isRequire}
+                name="IsRequired"
+                valuePropName="checked"
+              >
+                <Switch />
+              </Form.Item>
+            </Col>
+          </>
+        );
+      };
+      setIsAddChildren(RadioComponent);
+    }
+    if (getAddType === "Checkbox") {
+      const CheckboxComponent = () => {
+        return (
+          <>
+            <Col span={24}>
+              <Form.List name="items">
+                {(fields, { add, remove }) => (
+                  <div className="width100">
+                    {fields.map((field) => {
+                      return (
+                        <Space.Compact block key={field.key}>
+                          <Form.Item
+                            label={`新增選項`}
+                            name={[field.name, "name"]}
+                            className="width100"
+                            rules={[
+                              {
+                                required: true,
+                                message: "此欄位不得為空",
+                              },
+                            ]}
+                          >
+                            <Input />
+                          </Form.Item>
+                          {field.name === 0 ? null : (
+                            <Button
+                              type="primary"
+                              onClick={() => remove(field.name)}
+                            >
+                              刪除
+                            </Button>
+                          )}
+                        </Space.Compact>
+                      );
+                    })}
+                    <Button type="primary" onClick={() => add()} block>
+                      新增選項
+                    </Button>
+                  </div>
+                )}
+              </Form.List>
+            </Col>
+            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+              <Form.Item
+                label={AddChildren[getAddType].isRequire}
+                name="IsRequired"
+                valuePropName="checked"
+              >
+                <Switch />
+              </Form.Item>
+            </Col>
+          </>
+        );
+      };
+      setIsAddChildren(CheckboxComponent);
+    }
+    if (getAddType === "Select") {
+      const SelectComponent = () => {
+        return (
+          <>
+            <Col span={24}>
+              <Form.List name="items">
+                {(fields, { add, remove }) => (
+                  <div className="width100">
+                    {fields.map((field) => {
+                      return (
+                        <Space.Compact block key={field.key}>
+                          <Form.Item
+                            label={`新增選項`}
+                            name={[field.name, "name"]}
+                            className="width100"
+                            rules={[
+                              {
+                                required: true,
+                                message: "此欄位不得為空",
+                              },
+                            ]}
+                          >
+                            <Input />
+                          </Form.Item>
+                          {field.name === 0 ? null : (
+                            <Button
+                              type="primary"
+                              onClick={() => remove(field.name)}
+                            >
+                              刪除
+                            </Button>
+                          )}
+                        </Space.Compact>
+                      );
+                    })}
+                    <Button type="primary" onClick={() => add()} block>
+                      新增選項
+                    </Button>
+                  </div>
+                )}
+              </Form.List>
+            </Col>
+            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+              <Form.Item
+                label={AddChildren[getAddType].isRequire}
+                name="IsRequired"
+                valuePropName="checked"
+              >
+                <Switch />
+              </Form.Item>
+            </Col>
+          </>
+        );
+      };
+      setIsAddChildren(SelectComponent);
+    }
+  }, [getAddType]);
 
   useEffect(() => {
     form.resetFields();
@@ -766,7 +570,7 @@ export function AddComponent({
         addTypeName: isEditModalData.title,
         IsRequired: isEditModalData.required,
       });
-      if (getAddType === "Input") {
+      if (isEditModalData.type === "Input") {
         const InputComponent = () => {
           return (
             <>
@@ -784,7 +588,7 @@ export function AddComponent({
         };
         setIsAddChildren(InputComponent);
       }
-      if (getAddType === "Radio") {
+      if (isEditModalData.type === "Radio") {
         const RadioComponent = () => {
           return (
             <>
@@ -846,7 +650,7 @@ export function AddComponent({
         };
         setIsAddChildren(RadioComponent);
       }
-      if (getAddType === "Checkbox") {
+      if (isEditModalData.type === "Checkbox") {
         const CheckboxComponent = () => {
           return (
             <>
@@ -902,7 +706,7 @@ export function AddComponent({
         };
         setIsAddChildren(CheckboxComponent);
       }
-      if (getAddType === "Select") {
+      if (isEditModalData.type === "Select") {
         const SelectComponent = () => {
           return (
             <>
@@ -911,6 +715,7 @@ export function AddComponent({
                   {(fields = isEditModalData.options, { add, remove }) => (
                     <div className="width100">
                       {fields.map((field) => {
+                        // console.log(fields);
                         console.log(fields, field, isEditModalData);
                         return (
                           <Space.Compact block key={field.key}>
