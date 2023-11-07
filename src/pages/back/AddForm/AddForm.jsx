@@ -36,10 +36,9 @@ const addType = [
   },
 ];
 export default function AddForm() {
-  const getInitialState = useSelector((state) => state.AddTemplate.template);
+  const getReduxTemplate = useSelector((state) => state.AddTemplate.template);
 
   const dispatch = useDispatch();
-  const getReduxTemplate = useSelector((state) => state.AddTemplate.template);
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const location = useLocation();
@@ -65,23 +64,9 @@ export default function AddForm() {
   // ----------------------------------------------------
 
   // ------------------------編輯----------------------------
-  const [isEditModal, setIsEditModal] = useState(false);
   const [isEditModalData, setIsEditModalData] = useState(null);
-  const editModal = {
-    showModal: () => {
-      setIsEditModal(true);
-    },
-    handleOk: () => {
-      setIsEditModal(false);
-    },
-    handleCancel: () => {
-      setIsEditModal(false);
-    },
-  };
-  // ----------------------------------------------------
 
-  const [isEdit, setIsEdit] = useState(false);
-  const [isEditTemplate, setIsEditTemplate] = useState(null);
+  // ----------------------------------------------------
 
   const addNewTemplate = (values) => {
     const templateData = {
@@ -90,6 +75,8 @@ export default function AddForm() {
       template: [...IsAddList],
     };
     dispatch(setIsAddNewTemplate(templateData));
+    alert("即將自動跳轉回首頁");
+    navigate(-1);
   };
 
   useEffect(() => {
@@ -113,7 +100,18 @@ export default function AddForm() {
                   >
                     編輯
                   </Button>
-                  <Button type="primary">刪除</Button>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      setIsAddList((data) => {
+                        return data.filter(
+                          (template) => template.id !== item.id
+                        );
+                      });
+                    }}
+                  >
+                    刪除
+                  </Button>
                 </Space.Compact>
               </Col>
             </React.Fragment>
@@ -145,7 +143,18 @@ export default function AddForm() {
                   >
                     編輯
                   </Button>
-                  <Button type="primary">刪除</Button>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      setIsAddList((data) => {
+                        return data.filter(
+                          (template) => template.id !== item.id
+                        );
+                      });
+                    }}
+                  >
+                    刪除
+                  </Button>
                 </Space.Compact>
               </Col>
             </React.Fragment>
@@ -181,7 +190,18 @@ export default function AddForm() {
                   >
                     編輯
                   </Button>
-                  <Button type="primary">刪除</Button>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      setIsAddList((data) => {
+                        return data.filter(
+                          (template) => template.id !== item.id
+                        );
+                      });
+                    }}
+                  >
+                    刪除
+                  </Button>
                 </Space.Compact>
               </Col>
             </React.Fragment>
@@ -205,7 +225,18 @@ export default function AddForm() {
                   >
                     編輯
                   </Button>
-                  <Button type="primary">刪除</Button>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      setIsAddList((data) => {
+                        return data.filter(
+                          (template) => template.id !== item.id
+                        );
+                      });
+                    }}
+                  >
+                    刪除
+                  </Button>
                 </Space.Compact>
               </Col>
             </React.Fragment>
@@ -226,8 +257,172 @@ export default function AddForm() {
       (item) => item.id === getTemplateID
     );
     if (!!getReduxData) {
-      setIsEdit(true);
-      setIsEditTemplate(getReduxData);
+      const AddComponents = getReduxData?.template?.map((item, index) => {
+        if (item.type === "Input") {
+          return (
+            <React.Fragment key={index}>
+              <Col span={18}>
+                <Form.Item label={item.title} name={item.type + index + 1}>
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col span={6}>
+                <Space.Compact block>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      addModal.showModal(item);
+                    }}
+                  >
+                    編輯
+                  </Button>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      setIsAddList((data) => {
+                        return data.filter(
+                          (template) => template.id !== item.id
+                        );
+                      });
+                    }}
+                  >
+                    刪除
+                  </Button>
+                </Space.Compact>
+              </Col>
+            </React.Fragment>
+          );
+        }
+        if (item.type === "Radio") {
+          return (
+            <React.Fragment key={index}>
+              <Col span={18}>
+                <Form.Item label={item.title} name={item.type + index + 1}>
+                  <Radio.Group>
+                    {item.options.map((radio) => {
+                      return (
+                        <Radio value={radio.value} key={radio.value}>
+                          {radio.label}
+                        </Radio>
+                      );
+                    })}
+                  </Radio.Group>
+                </Form.Item>
+              </Col>
+              <Col span={6}>
+                <Space.Compact block>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      addModal.showModal(item);
+                    }}
+                  >
+                    編輯
+                  </Button>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      setIsAddList((data) => {
+                        return data.filter(
+                          (template) => template.id !== item.id
+                        );
+                      });
+                    }}
+                  >
+                    刪除
+                  </Button>
+                </Space.Compact>
+              </Col>
+            </React.Fragment>
+          );
+        }
+        if (item.type === "Checkbox") {
+          return (
+            <React.Fragment key={index}>
+              <Col span={18}>
+                <Form.Item label={item.title} name={item.type + index + 1}>
+                  <Checkbox.Group className="flex">
+                    {item.options.map((item) => {
+                      return (
+                        <Checkbox
+                          className="templateCheckbox"
+                          key={item.value}
+                          value={item.value}
+                        >
+                          {item.label}
+                        </Checkbox>
+                      );
+                    })}
+                  </Checkbox.Group>
+                </Form.Item>
+              </Col>
+              <Col span={6}>
+                <Space.Compact block>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      addModal.showModal(item);
+                    }}
+                  >
+                    編輯
+                  </Button>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      setIsAddList((data) => {
+                        return data.filter(
+                          (template) => template.id !== item.id
+                        );
+                      });
+                    }}
+                  >
+                    刪除
+                  </Button>
+                </Space.Compact>
+              </Col>
+            </React.Fragment>
+          );
+        }
+        if (item.type === "Select") {
+          return (
+            <React.Fragment key={index}>
+              <Col span={18}>
+                <Form.Item label={item.title} name={item.type + index + 1}>
+                  <Select options={item.options} />
+                </Form.Item>
+              </Col>
+              <Col span={6}>
+                <Space.Compact block>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      addModal.showModal(item);
+                    }}
+                  >
+                    編輯
+                  </Button>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      setIsAddList((data) => {
+                        return data.filter(
+                          (template) => template.id !== item.id
+                        );
+                      });
+                    }}
+                  >
+                    刪除
+                  </Button>
+                </Space.Compact>
+              </Col>
+            </React.Fragment>
+          );
+        }
+        return null;
+      });
+      setIsShowComponents(AddComponents);
+      setIsAddList(getReduxData?.template);
+      // console.log(getReduxData?.template);
       form.setFieldsValue({
         templateTitle: getReduxData.title,
       });
@@ -248,16 +443,6 @@ export default function AddForm() {
       >
         <Button type="primary" onClick={() => navigate(-1)} block>
           返回
-        </Button>
-        <Button
-          className="mt-10 mb-10"
-          type="primary"
-          onClick={() => {
-            console.log(getInitialState);
-          }}
-          block
-        >
-          確認模板資料
         </Button>
       </div>
       <div
@@ -300,11 +485,9 @@ export default function AddForm() {
             <Col span={24}>
               <span className="fz-26 fw-800">預覽模板</span>
             </Col>
-            {!isEdit
-              ? isShowComponents?.map((item, index) => {
-                  return <React.Fragment key={index}>{item}</React.Fragment>;
-                })
-              : null}
+            {isShowComponents?.map((item, index) => {
+              return <React.Fragment key={index}>{item}</React.Fragment>;
+            })}
 
             <Col span={24} className="flex justifyEnd">
               <Button type="primary" htmlType="submit">
@@ -354,9 +537,11 @@ export function AddComponent({
   const getAddType = Form.useWatch("addType", form);
 
   const [isAddChildren, setIsAddChildren] = useState(null);
+  const [isEdit, setIsEdit] = useState(false);
 
   const addFormItem = (value) => {
     const AddData = {
+      id: v4(),
       type: value.addType,
       required: !!value.IsRequired ? true : false,
       title: value.addTypeName,
@@ -369,7 +554,20 @@ export function AddComponent({
           })
         : [],
     };
-    setIsAddList((data) => [...data, AddData]);
+    if (isEdit) {
+      console.log(AddData);
+      setIsAddList((data) => {
+        return data.map((item) => {
+          if (item.title === AddData.title && item.type === AddData.type) {
+            return AddData;
+          }
+          return item;
+        });
+      });
+    } else {
+      setIsAddList((data) => [...data, AddData]);
+    }
+
     handleOk();
   };
 
@@ -593,13 +791,10 @@ export function AddComponent({
           return (
             <>
               <Col span={24}>
-                <Form.List name="items">
+                <Form.List name="items" initialValue={isEditModalData.options}>
                   {(fields = isEditModalData.options, { add, remove }) => (
                     <div className="width100">
                       {fields.map((field) => {
-                        console.log(
-                          isEditModalData.options?.[field.key]?.value
-                        );
                         return (
                           <Space.Compact block key={field.key}>
                             <Form.Item
@@ -607,7 +802,7 @@ export function AddComponent({
                               name={[field.name, "name"]}
                               className="width100"
                               initialValue={
-                                isEditModalData.options?.[field.key]?.value
+                                isEditModalData?.options?.[field?.key]?.value
                               }
                               rules={[
                                 {
@@ -655,7 +850,7 @@ export function AddComponent({
           return (
             <>
               <Col span={24}>
-                <Form.List name="items">
+                <Form.List name="items" initialValue={isEditModalData.options}>
                   {(fields = isEditModalData.options, { add, remove }) => (
                     <div className="width100">
                       {fields.map((field) => {
@@ -665,6 +860,9 @@ export function AddComponent({
                               label={`新增選項`}
                               name={[field.name, "name"]}
                               className="width100"
+                              initialValue={
+                                isEditModalData?.options?.[field?.key]?.value
+                              }
                               rules={[
                                 {
                                   required: true,
@@ -711,18 +909,19 @@ export function AddComponent({
           return (
             <>
               <Col span={24}>
-                <Form.List name="items">
-                  {(fields = isEditModalData.options, { add, remove }) => (
+                <Form.List name="items" initialValue={isEditModalData.options}>
+                  {(fields, { add, remove }) => (
                     <div className="width100">
                       {fields.map((field) => {
-                        // console.log(fields);
-                        console.log(fields, field, isEditModalData);
                         return (
                           <Space.Compact block key={field.key}>
                             <Form.Item
                               label={`新增選項`}
                               name={[field.name, "name"]}
                               className="width100"
+                              initialValue={
+                                isEditModalData?.options?.[field?.key]?.value
+                              }
                               rules={[
                                 {
                                   required: true,
@@ -764,6 +963,7 @@ export function AddComponent({
         };
         setIsAddChildren(SelectComponent);
       }
+      setIsEdit(true);
     } else {
       form.setFieldsValue({
         addType: "Input",
@@ -821,72 +1021,11 @@ export function AddComponent({
             <Button className="mr-5" onClick={handleCancel}>
               取消
             </Button>
-            <Button type="primary" className="ml-5" htmlType="submit">
-              新增
-            </Button>
-          </Col>
-        </Row>
-      </Form>
-    </Modal>
-  );
-}
 
-export function EditComponent({ isEditModal, handleEditOk, handleEditCancel }) {
-  const [form] = Form.useForm();
-  return (
-    <Modal
-      open={isEditModal}
-      onOk={handleEditOk}
-      onCancel={handleEditCancel}
-      centered
-      keyboard={false}
-      maskClosable={false}
-      closeIcon={false}
-      footer={null}
-      destroyOnClose={true}
-      forceRender={true}
-      width="90%"
-    >
-      <Form form={form}>
-        <Row gutter={[12, 12]} className="width100">
-          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-            <Form.Item
-              label="選擇類型"
-              name="addType"
-              rules={[
-                {
-                  required: true,
-                  message: "此欄位不得為空",
-                },
-              ]}
-            >
-              <Select options={addType} />
-            </Form.Item>
-          </Col>
-          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-            <Form.Item
-              label="欄位名稱"
-              name="addTypeName"
-              rules={[
-                {
-                  required: true,
-                  message: "此欄位不得為空",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-          {/* {isAddChildren} */}
-
-          {/* <Col span={24} className="flex-center">
-            <Button className="mr-5" onClick={handleCancel}>
-              取消
-            </Button>
             <Button type="primary" className="ml-5" htmlType="submit">
-              新增
+              {!isEdit ? "新增" : "編輯"}
             </Button>
-          </Col> */}
+          </Col>
         </Row>
       </Form>
     </Modal>
