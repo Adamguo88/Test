@@ -23,12 +23,12 @@ export default function Registered() {
       {
         templateName: "寵物展",
         status: "1",
-        pay: ["linePay", "全支付", "ETC"],
+        pay: ["linePay", "全支付", "綠界"],
       },
       {
         templateName: "飲料展",
         status: "0",
-        pay: ["linePay", "全支付", "ETC"],
+        pay: ["linePay", "全支付", "綠界"],
       },
     ];
     setIsShowRelease(fakeData);

@@ -203,6 +203,14 @@
 .ant-input-number .ant-input-number-handler-wrap {
   display: none;
 }
+.templateCheckbox {
+  .ant-checkbox-wrapper {
+    width: auto !important;
+    span {
+      color: black !important;
+    }
+  }
+}
 
 .ant-checkbox-group {
   .templateCheckbox {

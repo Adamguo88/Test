@@ -8,6 +8,8 @@ export default function Index() {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [isShowTemplate, setIsShowTemplate] = useState([]);
+  const watchPayType = Form.useWatch("payType", form);
+  const [isPaySelect, setIsPaySelect] = useState(false);
 
   const releaseTemplate = (values) => {
     const sendTemplate = {
@@ -20,8 +22,19 @@ export default function Index() {
   };
 
   useEffect(() => {
+    if (watchPayType === "1") {
+      setIsPaySelect(true);
+      form.setFieldsValue({
+        payList: "1",
+      });
+    } else {
+      setIsPaySelect(false);
+    }
+  }, [watchPayType, form]);
+
+  useEffect(() => {
     form.setFieldsValue({
-      payType: "1",
+      payType: "2",
     });
   }, [form]);
 
@@ -101,6 +114,26 @@ export default function Index() {
                 />
               </Form.Item>
             </Col>
+            {isPaySelect ? (
+              <Col span={24}>
+                <Form.Item label="繳費類型" name="payList">
+                  <Checkbox.Group className="templateCheckbox"
+                    style={{ color: "black" }}
+                    options={[
+                      {
+                        label: "全支付",
+                        value: "1",
+                      },
+                      {
+                        label: "綠界",
+                        value: "2",
+                      },
+                    ]}
+                  ></Checkbox.Group>
+                </Form.Item>
+              </Col>
+            ) : null}
+
             <Col span={24}>
               <div
                 style={{
