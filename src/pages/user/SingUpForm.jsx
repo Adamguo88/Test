@@ -16,6 +16,7 @@ export default function SingUpForm() {
   useEffect(() => {
     const search = location.search?.split("?templateID=")[1];
     const getData = getTemplateData.find((item) => item.id === search);
+    console.log(getData);
     setIsData(getData);
   }, [location, getTemplateData]);
   return (
@@ -60,7 +61,7 @@ export default function SingUpForm() {
             {isData?.template?.map((item, index) => {
               return (
                 <React.Fragment key={index}>
-                  {item?.template?.map((template, i) => {
+                  {item?.map((template, i) => {
                     return (
                       <Col span={8} key={i}>
                         {template.type === "Input" ? (

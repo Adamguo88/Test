@@ -7,97 +7,76 @@ const initialState = {
       templateName: "測試模板1",
       payType: "1",
       template: [
-        {
-          title: "文字模板",
-          template: [
-            {
-              options: [],
-              required: true,
-              title: "Email",
-              type: "Input",
-            },
-          ],
-        },
-        {
-          title: "Radio模板",
-          template: [
-            {
-              options: [
-                {
-                  label: "選項1",
-                  value: "1",
-                },
-                {
-                  label: "選項2",
-                  value: "2",
-                },
-              ],
-              required: true,
-              title: "選擇Radio",
-              type: "Radio",
-            },
-          ],
-        },
-        {
-          title: "CheckBox模板",
-          template: [
-            {
-              options: [
-                {
-                  label: "選項1",
-                  value: "1",
-                },
-                {
-                  label: "選項2",
-                  value: "2",
-                },
-              ],
-              required: true,
-              title: "測試Checkbox",
-              type: "Checkbox",
-            },
-          ],
-        },
-        {
-          title: "食物模板",
-          template: [
-            {
-              options: [
-                {
-                  label: "葷",
-                  value: "1",
-                },
-                {
-                  label: "素",
-                  value: "2",
-                },
-              ],
-              required: true,
-              title: "選擇葷素",
-              type: "Select",
-            },
-          ],
-        },
-        {
-          title: "房型模板",
-          template: [
-            {
-              options: [
-                {
-                  label: "雙人房",
-                  value: "1",
-                },
-                {
-                  label: "單人房",
-                  value: "2",
-                },
-              ],
-              required: true,
-              title: "選擇房型",
-              type: "Select",
-            },
-          ],
-        },
+        [
+          {
+            options: [],
+            required: true,
+            title: "Email",
+            type: "Input",
+          },
+          {
+            options: [
+              {
+                label: "選項1",
+                value: "1",
+              },
+              {
+                label: "選項2",
+                value: "2",
+              },
+            ],
+            required: true,
+            title: "選擇Radio",
+            type: "Radio",
+          },
+        ],
+        [
+          {
+            options: [
+              {
+                label: "選項1",
+                value: "1",
+              },
+              {
+                label: "選項2",
+                value: "2",
+              },
+            ],
+            required: true,
+            title: "測試Checkbox",
+            type: "Checkbox",
+          },
+          {
+            options: [
+              {
+                label: "葷",
+                value: "1",
+              },
+              {
+                label: "素",
+                value: "2",
+              },
+            ],
+            required: true,
+            title: "選擇葷素",
+            type: "Select",
+          },
+          {
+            options: [
+              {
+                label: "雙人房",
+                value: "1",
+              },
+              {
+                label: "單人房",
+                value: "2",
+              },
+            ],
+            required: true,
+            title: "選擇房型",
+            type: "Select",
+          },
+        ],
       ],
     },
   ],

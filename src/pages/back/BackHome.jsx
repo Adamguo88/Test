@@ -19,6 +19,8 @@ export default function Index() {
       template: isShowTemplate,
     };
     dispatch(setNewTemplate(sendTemplate));
+    alert("新增成功");
+    // form.resetFields();
   };
 
   useEffect(() => {
