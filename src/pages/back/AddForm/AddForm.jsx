@@ -65,12 +65,13 @@ export default function AddForm() {
 
   // ------------------------編輯----------------------------
   const [isEditModalData, setIsEditModalData] = useState(null);
+  const [isEditID, setIsEditID] = useState(null);
 
   // ----------------------------------------------------
 
   const addNewTemplate = (values) => {
     const templateData = {
-      id: v4(),
+      id: isEditID,
       title: values.templateTitle,
       template: [...IsAddList],
     };
@@ -420,6 +421,7 @@ export default function AddForm() {
         }
         return null;
       });
+      setIsEditID(getTemplateID);
       setIsShowComponents(AddComponents);
       setIsAddList(getReduxData?.template);
       // console.log(getReduxData?.template);

@@ -24,11 +24,11 @@ const initialState = {
           options: [
             {
               label: "選項1",
-              value: "1",
+              value: "選項1",
             },
             {
               label: "選項2",
-              value: "2",
+              value: "選項2",
             },
           ],
           required: true,
@@ -46,11 +46,11 @@ const initialState = {
           options: [
             {
               label: "選項1",
-              value: "1",
+              value: "選項1",
             },
             {
               label: "選項2",
-              value: "2",
+              value: "選項2",
             },
           ],
           required: true,
@@ -68,11 +68,11 @@ const initialState = {
           options: [
             {
               label: "葷",
-              value: "1",
+              value: "葷",
             },
             {
               label: "素",
-              value: "2",
+              value: "素",
             },
           ],
           required: true,
@@ -90,11 +90,11 @@ const initialState = {
           options: [
             {
               label: "雙人房",
-              value: "1",
+              value: "雙人房",
             },
             {
               label: "單人房",
-              value: "2",
+              value: "單人房",
             },
           ],
           required: true,
@@ -112,10 +112,20 @@ const store = createSlice({
   reducers: {
     setIsAddNewTemplate(state, action) {
       const data = action.payload;
-      // console.log(data); // 傳進來的參數
+      console.log(data); // 傳進來的參數
       // console.log(state,'state');        // initialState的值
       // console.log(action,'action');      // 傳入 type 和 payload(傳進來參數)
-      state.template = [...state.template, data];
+      if (!data.id) {
+        state.template = [...state.template, { ...data, id: v4() }];
+      } else {
+        const findData = state.template.map((item) => {
+          if (item.id === data.id) {
+            return data;
+          }
+          return item;
+        });
+        state.template = [...findData];
+      }
     },
   },
 });

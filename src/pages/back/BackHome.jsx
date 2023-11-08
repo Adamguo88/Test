@@ -4,7 +4,9 @@ import { useDispatch } from "react-redux";
 import { setNewTemplate } from "redux/actions/NewRelease";
 import BackMenu from "./Menu/BackMenu";
 import { v4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 export default function Index() {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const [form] = Form.useForm();
@@ -24,6 +26,7 @@ export default function Index() {
     };
     dispatch(setNewTemplate(sendTemplate));
     alert("新增成功");
+    navigate('/user')
   };
 
   const handleDragList = {

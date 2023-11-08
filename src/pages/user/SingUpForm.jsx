@@ -33,17 +33,44 @@ export default function SingUpForm() {
               <span className="fz-20 fw-900">{isData?.templateName}</span>
             </Col>
             <Col xxl={8} xl={8} lg={8} md={8} sm={24} xs={24}>
-              <Form.Item name="name" label="姓名">
+              <Form.Item
+                name="name"
+                label="姓名"
+                rules={[
+                  {
+                    required: true,
+                    message: "此欄位不得為空",
+                  },
+                ]}
+              >
                 <Input />
               </Form.Item>
             </Col>
             <Col xxl={8} xl={8} lg={8} md={8} sm={24} xs={24}>
-              <Form.Item name="phone" label="聯絡電話">
+              <Form.Item
+                name="phone"
+                label="聯絡電話"
+                rules={[
+                  {
+                    required: true,
+                    message: "此欄位不得為空",
+                  },
+                ]}
+              >
                 <Input />
               </Form.Item>
             </Col>
             <Col xxl={8} xl={8} lg={8} md={8} sm={24} xs={24}>
-              <Form.Item name="gender" label="性別">
+              <Form.Item
+                name="gender"
+                label="性別"
+                rules={[
+                  {
+                    required: true,
+                    message: "此欄位不得為空",
+                  },
+                ]}
+              >
                 <Radio.Group
                   options={[
                     {
@@ -65,6 +92,12 @@ export default function SingUpForm() {
                     <Form.Item
                       label={template.title}
                       name={template.type + index + 1}
+                      rules={[
+                        {
+                          required: template.required,
+                          message: "此欄位不得為空",
+                        },
+                      ]}
                     >
                       <Input />
                     </Form.Item>
@@ -73,6 +106,12 @@ export default function SingUpForm() {
                     <Form.Item
                       label={template.title}
                       name={template.type + index + 1}
+                      rules={[
+                        {
+                          required: template.required,
+                          message: "此欄位不得為空",
+                        },
+                      ]}
                     >
                       <Radio.Group>
                         {template.options.map((radio) => {
@@ -89,6 +128,12 @@ export default function SingUpForm() {
                     <Form.Item
                       label={template.title}
                       name={template.type + index + 1}
+                      rules={[
+                        {
+                          required: template.required,
+                          message: "此欄位不得為空",
+                        },
+                      ]}
                     >
                       <Checkbox.Group className="flex">
                         {template.options.map((ch) => {
@@ -109,6 +154,12 @@ export default function SingUpForm() {
                     <Form.Item
                       label={template.title}
                       name={template.type + index + 1}
+                      rules={[
+                        {
+                          required: template.required,
+                          message: "此欄位不得為空",
+                        },
+                      ]}
                     >
                       <Select options={template.options} />
                     </Form.Item>
