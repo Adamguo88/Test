@@ -33,7 +33,7 @@
 .height100-header-footer {
   min-height: calc(100vh - 64px - 51px - 82px);
 }
-.height100-question{
+.height100-question {
   min-height: calc(100vh - 64px - 55px - 82px);
 }
 .min-height-header-headerBack-footer {
@@ -323,7 +323,7 @@
 .border-setting-1 {
   border: 2px solid $bg-setting;
 }
-.shadow-none{
+.shadow-none {
   box-shadow: none !important;
 }
 
@@ -574,4 +574,8 @@
   .footer-height100vh {
     height: 100vh;
   }
+}
+.newTemplateBorder {
+  border: 1px solid $bgc5-2;
+  border-radius: 4px;
 }

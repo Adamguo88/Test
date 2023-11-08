@@ -8,6 +8,9 @@ const UserIndex = lazy(() => import("pages/user/Index"));
 const BackIndex = lazy(() => import("pages/back/Index"));
 const BackHome = lazy(() => import("pages/back/BackHome"));
 const AddForm = lazy(() => import("pages/back/AddForm/AddForm"));
+const AddDragTemplate = lazy(() =>
+  import("pages/back/AddForm/AddDragTemplate")
+);
 const SignUpFrom = lazy(() => import("pages/user/SingUpForm"));
 
 const router = createBrowserRouter([
@@ -45,6 +48,10 @@ const router = createBrowserRouter([
           {
             path: "addForm",
             element: <AddForm />,
+          },
+          {
+            path: "addDragTemplate",
+            element: <AddDragTemplate />,
           },
         ],
       },

@@ -38,6 +38,14 @@ export default function BackMenu({ setIsShowTemplate }) {
       >
         新增模板
       </Button>
+      <Button
+        type="primary"
+        block
+        onClick={() => navigate("/back/addDragTemplate")}
+        className="mb-10"
+      >
+        測試拖曳模板
+      </Button>
       <Checkbox.Group
         className="width100"
         style={{
