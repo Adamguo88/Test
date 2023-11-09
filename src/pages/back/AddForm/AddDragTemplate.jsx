@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Button,
   Form,
@@ -13,7 +13,7 @@ import {
   Select,
 } from "antd";
 import { v4 } from "uuid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setIsAddNewTemplate } from "redux/actions/AddTemplate";
 
 const addType = [
@@ -35,7 +35,11 @@ const addType = [
   },
 ];
 export default function AddDragTemplate() {
+  const getReduxTemplateData = useSelector(
+    (state) => state.AddTemplate.template
+  );
   const dispatch = useDispatch();
+  const location = useLocation();
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [editForm = form] = Form.useForm();
@@ -138,6 +142,19 @@ export default function AddDragTemplate() {
       }
     },
   };
+
+  useEffect(() => {
+    const search = location.search?.split("templateID=")?.[1];
+    const findData = getReduxTemplateData.find((item) => item.id === search);
+
+    if (!!findData) {
+      setIsSample(findData.template);
+      form.setFieldsValue({
+        templateID: findData.id,
+        templateTitle: findData.title,
+      });
+    }
+  }, [location, getReduxTemplateData, form]);
 
   useEffect(() => {
     const width = {
@@ -243,7 +260,7 @@ export default function AddDragTemplate() {
                     className="width100 flex  p-10"
                     onClick={() => handleEditTemplate(item)}
                   >
-                    <Col span={18}>
+                    <Col span={21}>
                       {item.type === "Input" ? (
                         <div className="width100 flex flex-column">
                           <Form.Item
@@ -293,7 +310,7 @@ export default function AddDragTemplate() {
                         </div>
                       ) : null}
                     </Col>
-                    <Col span={6} className="flex justifyEnd alignStart">
+                    <Col span={3} className="flex justifyEnd alignStart">
                       <Button
                         type="primary"
                         danger
@@ -552,6 +569,18 @@ export default function AddDragTemplate() {
                           </div>
                         )}
                       </Form.List>
+                      <Form.Item label="關係" name="relation">
+                        <Select
+                          options={[
+                            ...new Set(
+                              isSample.map((item) => ({
+                                label: item.title,
+                                value: item.title,
+                              }))
+                            ),
+                          ]}
+                        />
+                      </Form.Item>
                     </>
                   ) : null}
                 </Col>

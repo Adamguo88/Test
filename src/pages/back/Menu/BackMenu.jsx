@@ -24,51 +24,99 @@ export default function BackMenu({ setIsShowTemplate }) {
       style={{
         width: "256px",
         maxWidth: "256px",
-        height: "calc( 100vh - 46px )",
+        minHeight: "calc( 100vh - 46px )",
         backgroundColor: "#001529",
         color: "white",
-        padding: "10px 15px",
       }}
     >
-      <Button
-        type="primary"
-        block
-        onClick={() => navigate("/back/addForm")}
-        className="mb-10"
-      >
-        新增模板
-      </Button>
-      <Button
-        type="primary"
-        block
-        onClick={() => navigate("/back/addDragTemplate")}
-        className="mb-10"
-      >
-        測試拖曳模板
-      </Button>
-      <Checkbox.Group
+      <div
         className="width100"
         style={{
-          color: "white",
+          position: "sticky",
+          top: "0px",
+          padding: "10px 15px",
         }}
-        onChange={getCheckTemplate}
       >
-        {isTemplate.map((item, index) => {
-          return (
-            <Space.Compact className="width100 flex justifyBetween" key={index}>
-              <Checkbox value={item.template}>{item.title}</Checkbox>
-              <Button
-                type="primary"
-                onClick={() => {
-                  navigate(`/back/addForm?templateID=${item.id}`);
-                }}
+        <Button
+          type="primary"
+          block
+          onClick={() => navigate("/back/addForm")}
+          className="mb-10"
+        >
+          新增模板
+        </Button>
+
+        <Checkbox.Group
+          className="width100"
+          style={{
+            color: "white",
+          }}
+          onChange={getCheckTemplate}
+        >
+          {isTemplate.map((item, index) => {
+            return (
+              <Space.Compact
+                className="width100 flex justifyBetween"
+                key={index}
               >
-                編輯
-              </Button>
-            </Space.Compact>
-          );
-        })}
-      </Checkbox.Group>
+                <Checkbox value={item.template}>{item.title}</Checkbox>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    navigate(`/back/addForm?templateID=${item.id}`);
+                  }}
+                >
+                  編輯
+                </Button>
+              </Space.Compact>
+            );
+          })}
+        </Checkbox.Group>
+
+        <div
+          className="mt-10 mb-10 fw-900 fz-18"
+          style={{
+            borderTop: "3px solid white",
+            borderBottom: "3px solid white",
+          }}
+        >
+          拖曳模板編輯
+        </div>
+        <Button
+          type="primary"
+          block
+          onClick={() => navigate("/back/addDragTemplate")}
+          className="mb-10"
+        >
+          測試拖曳模板
+        </Button>
+        <Checkbox.Group
+          className="width100"
+          style={{
+            color: "white",
+          }}
+          onChange={getCheckTemplate}
+        >
+          {isTemplate.map((item, index) => {
+            return (
+              <Space.Compact
+                className="width100 flex justifyBetween"
+                key={index}
+              >
+                <Checkbox value={item.template}>{item.title}</Checkbox>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    navigate(`/back/addDragTemplate?templateID=${item.id}`);
+                  }}
+                >
+                  編輯
+                </Button>
+              </Space.Compact>
+            );
+          })}
+        </Checkbox.Group>
+      </div>
     </div>
   );
 }
