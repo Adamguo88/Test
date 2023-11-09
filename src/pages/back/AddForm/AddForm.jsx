@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsAddNewTemplate } from "redux/actions/AddTemplate";
@@ -38,6 +38,7 @@ const addType = [
 export default function AddForm() {
   const getReduxTemplate = useSelector((state) => state.AddTemplate.template);
 
+  const modelRef = useRef();
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ export default function AddForm() {
       setIsEditModalData(null);
     },
   };
+  modelRef.current = addModal;
   // ----------------------------------------------------
 
   // ------------------------編輯----------------------------
@@ -96,7 +98,7 @@ export default function AddForm() {
                   <Button
                     type="primary"
                     onClick={() => {
-                      addModal.showModal(item);
+                      modelRef.current.showModal(item);
                     }}
                   >
                     編輯
@@ -139,7 +141,7 @@ export default function AddForm() {
                   <Button
                     type="primary"
                     onClick={() => {
-                      addModal.showModal(item);
+                      modelRef.current.showModal(item);
                     }}
                   >
                     編輯
@@ -186,7 +188,7 @@ export default function AddForm() {
                   <Button
                     type="primary"
                     onClick={() => {
-                      addModal.showModal(item);
+                      modelRef.current.showModal(item);
                     }}
                   >
                     編輯
@@ -221,7 +223,7 @@ export default function AddForm() {
                   <Button
                     type="primary"
                     onClick={() => {
-                      addModal.showModal(item);
+                      modelRef.current.showModal(item);
                     }}
                   >
                     編輯
@@ -272,7 +274,7 @@ export default function AddForm() {
                   <Button
                     type="primary"
                     onClick={() => {
-                      addModal.showModal(item);
+                      modelRef.current.showModal(item);
                     }}
                   >
                     編輯
@@ -315,7 +317,7 @@ export default function AddForm() {
                   <Button
                     type="primary"
                     onClick={() => {
-                      addModal.showModal(item);
+                      modelRef.current.showModal(item);
                     }}
                   >
                     編輯
@@ -362,7 +364,7 @@ export default function AddForm() {
                   <Button
                     type="primary"
                     onClick={() => {
-                      addModal.showModal(item);
+                      modelRef.current.showModal(item);
                     }}
                   >
                     編輯
@@ -397,7 +399,7 @@ export default function AddForm() {
                   <Button
                     type="primary"
                     onClick={() => {
-                      addModal.showModal(item);
+                      modelRef.current.showModal(item);
                     }}
                   >
                     編輯
@@ -437,15 +439,22 @@ export default function AddForm() {
         style={{
           width: "256px",
           maxWidth: "256px",
-          height: "calc( 100vh - 46px )",
+          minHeight: "calc( 100vh - 46px )",
           backgroundColor: "#001529",
           color: "white",
-          padding: "10px 15px",
         }}
       >
-        <Button type="primary" onClick={() => navigate(-1)} block>
-          返回
-        </Button>
+        <div
+          className="width100 height100 p-10-15"
+          style={{
+            position: "sticky",
+            top: 0,
+          }}
+        >
+          <Button type="primary" onClick={() => navigate(-1)} block>
+            返回
+          </Button>
+        </div>
       </div>
       <div
         className="p-10-15"
