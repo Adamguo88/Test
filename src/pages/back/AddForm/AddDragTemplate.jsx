@@ -87,11 +87,40 @@ export default function AddDragTemplate() {
       options: template.options.length <= 0 ? [0] : template.options,
     });
   };
+  // 監聽右側模板 發生變化
+  const handleChangeFormTemplate = ({ openRelation, relationWithWho }) => {
+    if (openRelation === true) {
+      setIsEditTemplate((data) => ({ ...data, openRelation }));
+    }
+    if (openRelation === false) {
+      setIsEditTemplate((data) => ({ ...data, openRelation }));
+    }
+    if (relationWithWho) {
+      editForm.setFieldsValue({
+        relationWithOptions: [],
+      });
+      const relationWithOptions = isSample.find(
+        (item) => item.title === relationWithWho
+      );
+      setIsEditTemplate((data) => ({
+        ...data,
+        relationWithWho,
+        relationWithOptions,
+      }));
+    }
+  };
   // 完成最右側編輯
   const handleEditFormTemplate = (values) => {
     const findData = isSample.map((item) => {
       if (item.id === values.id) {
-        const { options, required, title } = values;
+        const {
+          options,
+          required,
+          title,
+          openRelation,
+          relationWithOptions,
+          relationWithWho,
+        } = values;
         const newOptions = !options
           ? []
           : options.map((option) => ({
@@ -103,10 +132,13 @@ export default function AddDragTemplate() {
           required,
           title,
           options: newOptions,
+          openRelation,
+          relationWithOptions,
+          relationWithWho,
         };
       }
       return item;
-    });
+    })
     setIsSample(findData);
     setIsEditTemplate({});
   };
@@ -167,6 +199,7 @@ export default function AddDragTemplate() {
   return (
     <div
       className="width100 flex"
+      onMouseMove={handelAutoWidth.mouseMove}
       onMouseUp={handelAutoWidth.mouseUp}
       onMouseLeave={handelAutoWidth.mouseLeave}
     >
@@ -210,6 +243,7 @@ export default function AddDragTemplate() {
           })}
         </div>
       </div>
+
       <div
         ref={mainWidth}
         className="p-10-15"
@@ -332,6 +366,7 @@ export default function AddDragTemplate() {
           </Row>
         </Form>
       </div>
+
       <div
         className="dragAnimation"
         style={{
@@ -339,7 +374,6 @@ export default function AddDragTemplate() {
           cursor: "e-resize",
         }}
         onMouseDown={handelAutoWidth.mouseDown}
-        onMouseMove={handelAutoWidth.mouseMove}
       >
         <div
           style={{
@@ -367,7 +401,11 @@ export default function AddDragTemplate() {
       >
         <div className="width100 height100">
           {!!isEditTemplate?.id ? (
-            <Form form={editForm} onFinish={handleEditFormTemplate}>
+            <Form
+              form={editForm}
+              onFinish={handleEditFormTemplate}
+              onValuesChange={handleChangeFormTemplate}
+            >
               <Row gutter={[24, 24]}>
                 <Col
                   span={24}
@@ -569,14 +607,60 @@ export default function AddDragTemplate() {
                           </div>
                         )}
                       </Form.List>
-                      <Form.Item label="關係" name="relation">
+
+                      <div
+                        style={{
+                          border: "2px solid black",
+                          marginTop: "20px",
+                          marginBottom: "20px",
+                        }}
+                      />
+                      <Form.Item
+                        label="開啟關聯"
+                        name="openRelation"
+                        className="mt-10"
+                        valuePropName="checked"
+                      >
+                        <Switch />
+                      </Form.Item>
+
+                      <Form.Item
+                        label="關聯主項"
+                        name="relationWithWho"
+                        className="mt-10"
+                        hidden={!isEditTemplate.openRelation}
+                      >
                         <Select
                           options={[
                             ...new Set(
-                              isSample.map((item) => ({
-                                label: item.title,
-                                value: item.title,
-                              }))
+                              isSample
+                                .filter((item) => item.id !== isEditTemplate.id)
+                                .map((item) => ({
+                                  label: item.title,
+                                  value: item.id,
+                                }))
+                            ),
+                          ]}
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        label="選項"
+                        name="relationWithOptions"
+                        className="mt-10"
+                        hidden={
+                          !isEditTemplate.openRelation ||
+                          !isEditTemplate.relationWithWho
+                        }
+                      >
+                        <Select
+                          options={[
+                            ...new Set(
+                              isSample.find(
+                                (item) =>
+                                  item.title ===
+                                  editForm.getFieldsValue("relationWithWho")
+                                    .relationWithWho
+                              )?.options
                             ),
                           ]}
                         />

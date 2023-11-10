@@ -6,7 +6,7 @@ import BackMenu from "./Menu/BackMenu";
 import { v4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 export default function Index() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [form] = Form.useForm();
@@ -26,7 +26,11 @@ export default function Index() {
     };
     dispatch(setNewTemplate(sendTemplate));
     alert("新增成功");
-    navigate('/user')
+    navigate("/user");
+  };
+  const handleChange = (values) => {
+    console.log(values);
+    console.log(isShowTemplate);
   };
 
   const handleDragList = {
@@ -91,6 +95,7 @@ export default function Index() {
           layout="vertical"
           className="width100"
           onFinish={releaseTemplate}
+          onValuesChange={handleChange}
         >
           <Row gutter={[12, 12]}>
             <Col span={24}>
@@ -200,7 +205,7 @@ export default function Index() {
                   {template.type === "Input" ? (
                     <Form.Item
                       label={template.title}
-                      name={template.type + index + 1}
+                      name={template.id}
                     >
                       <Input />
                     </Form.Item>
@@ -208,7 +213,7 @@ export default function Index() {
                   {template.type === "Radio" ? (
                     <Form.Item
                       label={template.title}
-                      name={template.type + index + 1}
+                      name={template.id}
                     >
                       <Radio.Group>
                         {template.options.map((radio) => {
@@ -224,7 +229,7 @@ export default function Index() {
                   {template.type === "Checkbox" ? (
                     <Form.Item
                       label={template.title}
-                      name={template.type + index + 1}
+                      name={template.id}
                     >
                       <Checkbox.Group className="flex">
                         {template.options.map((ch) => {
@@ -244,7 +249,7 @@ export default function Index() {
                   {template.type === "Select" ? (
                     <Form.Item
                       label={template.title}
-                      name={template.type + index + 1}
+                      name={template.id}
                     >
                       <Select options={template.options} />
                     </Form.Item>
