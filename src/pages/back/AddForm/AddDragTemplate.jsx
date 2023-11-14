@@ -49,7 +49,7 @@ export default function AddDragTemplate() {
 
   // ---------------------------------bate---------------------------------
   const [isDragWidth, setIsDragWidth] = useState(false);
-  const [isWidth, setIsWidth] = useState({ main: "", edit: 256 });
+  const [isWidth, setIsWidth] = useState({ main: "", edit: 400 });
   const mainWidth = useRef();
   const editWidth = useRef();
   // ---------------------------------bate---------------------------------
@@ -132,13 +132,24 @@ export default function AddDragTemplate() {
           required,
           title,
           options: newOptions,
-          openRelation,
-          relationWithOptions,
-          relationWithWho,
+          openRelation: openRelation || false,
+          relationWithOptions: relationWithOptions || false,
+          relationWithWho: relationWithWho || false,
+        };
+      }
+      if (!!values.openRelation && item.id === values.relationWithWho) {
+        return {
+          ...item,
+          relation: {
+            relationSwitch: true,
+            relationID: values.id,
+            relationValue: values.relationWithOptions,
+          },
         };
       }
       return item;
-    })
+    });
+    console.log(findData);
     setIsSample(findData);
     setIsEditTemplate({});
   };
@@ -657,7 +668,7 @@ export default function AddDragTemplate() {
                             ...new Set(
                               isSample.find(
                                 (item) =>
-                                  item.title ===
+                                  item.id ===
                                   editForm.getFieldsValue("relationWithWho")
                                     .relationWithWho
                               )?.options

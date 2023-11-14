@@ -203,18 +203,12 @@ export default function Index() {
                   }
                 >
                   {template.type === "Input" ? (
-                    <Form.Item
-                      label={template.title}
-                      name={template.id}
-                    >
+                    <Form.Item label={template.title} name={template.id}>
                       <Input />
                     </Form.Item>
                   ) : null}
                   {template.type === "Radio" ? (
-                    <Form.Item
-                      label={template.title}
-                      name={template.id}
-                    >
+                    <Form.Item label={template.title} name={template.id}>
                       <Radio.Group>
                         {template.options.map((radio) => {
                           return (
@@ -227,10 +221,7 @@ export default function Index() {
                     </Form.Item>
                   ) : null}
                   {template.type === "Checkbox" ? (
-                    <Form.Item
-                      label={template.title}
-                      name={template.id}
-                    >
+                    <Form.Item label={template.title} name={template.id}>
                       <Checkbox.Group className="flex">
                         {template.options.map((ch) => {
                           return (
@@ -247,10 +238,7 @@ export default function Index() {
                     </Form.Item>
                   ) : null}
                   {template.type === "Select" ? (
-                    <Form.Item
-                      label={template.title}
-                      name={template.id}
-                    >
+                    <Form.Item label={template.title} name={template.id}>
                       <Select options={template.options} />
                     </Form.Item>
                   ) : null}
