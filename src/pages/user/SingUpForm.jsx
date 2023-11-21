@@ -12,7 +12,8 @@ export default function SingUpForm() {
   const [isHide, setIsHide] = useState({});
   const getTemplateData = useSelector((state) => state.NewRelease.template);
 
-  const { relation } = useWatchForm(isData?.template, form);
+  // 自定義ahooks，主要功能用於，當我拿到(API)之後，使用useWatchForm篩選，判斷這筆(API)是否有關聯表單，有的話返回所有的關聯表單的list
+  const { relation } = useWatchForm(isData?.template, form); // 獲取有關聯表單的form value
 
   // const result = Form.useWatch([], form);
   // console.log(result);
@@ -22,12 +23,19 @@ export default function SingUpForm() {
   };
 
   const onValuesChange = (values) => {
+    // 當每次form 發生變化的時候監聽，此次的form表單裡面的值是否有關聯表單
     if (relation.length >= 1) {
+      // 如果有的話，篩選判斷發生當前變化form的值(key)，是否包含在我的ahooks值裡面
       const getValuesKey = Object.keys(values)?.[0];
       const isRelationItem = relation.find((item) => item.id === getValuesKey);
+
+      // 如果當前變化的值，包含在我的ahooks裡面的話
       if (!!isRelationItem) {
+        console.log(values);
         const getValue = Object.values(values)?.[0];
+        // isRelationItem.relation -> 獲得所有資料中有關聯表單的值，並且獲取 【relationID(關聯表單的lable), relationValue('值')】
         const { relationID, relationValue } = isRelationItem.relation;
+        // 如果關聯表單中的值(relationValue) 等於 我當前的values，表示【隱藏】當前關聯表單中的選單
         if (relationValue === getValue) {
           setIsHide((data) => ({
             ...data,

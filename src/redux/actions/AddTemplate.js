@@ -470,7 +470,7 @@ const initialState = {
           type: "Select",
         },
         {
-          id: v4(),
+          id: 'm-2',
           options: [
             {
               label: "單點",
@@ -506,7 +506,7 @@ const initialState = {
           type: "Select",
         },
         {
-          id: v4(),
+          id: 'm-3',
           options: [
             {
               label: "單點勿選",

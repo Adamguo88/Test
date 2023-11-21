@@ -73,7 +73,7 @@ export default function BackMenu({ setIsShowTemplate }) {
           })}
         </Checkbox.Group>
 
-        <div
+        {/* <div
           className="mt-10 mb-10 fw-900 fz-18"
           style={{
             borderTop: "3px solid white",
@@ -115,7 +115,7 @@ export default function BackMenu({ setIsShowTemplate }) {
               </Space.Compact>
             );
           })}
-        </Checkbox.Group>
+        </Checkbox.Group> */}
       </div>
     </div>
   );

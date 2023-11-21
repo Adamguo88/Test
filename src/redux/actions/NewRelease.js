@@ -375,6 +375,160 @@ const initialState = {
         },
       ],
     },
+    {
+      id: v4(),
+      title: "麥當勞",
+      templateName: "2023/11/17 - 麥當勞",
+      payType: "2",
+      template: [
+        {
+          id: "m-1",
+          options: [
+            {
+              label: "BLT 安格斯黑牛堡",
+              value: "BLT 安格斯黑牛堡",
+            },
+            {
+              label: "BLT 辣脆雞腿堡",
+              value: "BLT 辣脆雞腿堡",
+            },
+            {
+              label: "BLT 嫩煎雞腿堡",
+              value: "BLT 嫩煎雞腿堡",
+            },
+            {
+              label: "蕈菇安格斯黑牛堡",
+              value: "蕈菇安格斯黑牛堡",
+            },
+            {
+              label: "大麥克",
+              value: "大麥克",
+            },
+            {
+              label: "雙層牛肉吉事堡",
+              value: "雙層牛肉吉事堡",
+            },
+            {
+              label: "嫩煎雞腿堡",
+              value: "嫩煎雞腿堡",
+            },
+            {
+              label: "麥香雞",
+              value: "麥香雞",
+            },
+            {
+              label: "雙層麥香雞",
+              value: "雙層麥香雞",
+            },
+            {
+              label: "勁辣雞腿堡",
+              value: "勁辣雞腿堡",
+            },
+            {
+              label: "麥香魚",
+              value: "麥香魚",
+            },
+            {
+              label: "麥克雞塊(6塊)",
+              value: "麥克雞塊(6塊)",
+            },
+            {
+              label: "麥克雞塊(10塊)",
+              value: "麥克雞塊(10塊)",
+            },
+            {
+              label: "(原味)麥脆雞",
+              value: "(原味)麥脆雞",
+            },
+            {
+              label: "(辣味)麥脆雞",
+              value: "(辣味)麥脆雞",
+            },
+          ],
+          required: true,
+          title: "主餐",
+          type: "Select",
+        },
+        {
+          id: "m-2",
+          options: [
+            {
+              label: "單點",
+              value: "單點",
+            },
+            {
+              label: "A餐 - 中薯+飲料",
+              value: "A餐 - 中薯+飲料",
+            },
+            {
+              label: "B餐 - 沙拉+熱飲",
+              value: "B餐 - 沙拉+熱飲",
+            },
+            {
+              label: "C餐 - 炸雞+飲料",
+              value: "C餐 - 炸雞+飲料",
+            },
+            {
+              label: "D餐 - 冰炫風+小薯+飲料",
+              value: "D餐 - 冰炫風+小薯+飲料",
+            },
+            {
+              label: "E餐 - 6塊雞塊+小薯+飲料",
+              value: "E餐 - 6塊雞塊+小薯+飲料",
+            },
+            {
+              label: "F餐 - 地瓜薯條+飲料",
+              value: "F餐 - 地瓜薯條+飲料",
+            },
+          ],
+          required: true,
+          title: "副餐",
+          type: "Select",
+          relation: {
+            relationID: "m-3",
+            relationSwitch: true,
+            relationValue: "單點",
+          },
+        },
+        {
+          id: "m-3",
+          options: [
+            {
+              label: "單點勿選",
+              value: "單點勿選",
+            },
+            {
+              label: "可口可樂",
+              value: "可口可樂",
+            },
+            {
+              label: "可口可樂 zero",
+              value: "可口可樂 zero",
+            },
+            {
+              label: "雪碧",
+              value: "雪碧",
+            },
+            {
+              label: "檸檬紅茶",
+              value: "檸檬紅茶",
+            },
+            {
+              label: "紅茶(無糖)",
+              value: "紅茶(無糖)",
+            },
+            {
+              label: "綠茶(無糖)",
+              value: "綠茶(無糖)",
+            },
+          ],
+          required: true,
+          title: "飲料",
+          type: "Select",
+          openRelation: true,
+        },
+      ],
+    },
   ],
 };
 
